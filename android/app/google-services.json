@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "994893675209",
+    "project_id": "kolorkash-3d",
+    "storage_bucket": "kolorkash-3d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994893675209:android:a0a3cc5ed2186ea0642b18",
+        "android_client_info": {
+          "package_name": "com.kolorkash3d.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXCEi0earSqO5hYHsSNQnYirEdtDObE1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

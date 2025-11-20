@@ -1,0 +1,56 @@
+type User @table {
+  username: String!
+  email: String!
+  createdAt: Timestamp!
+  kashBalance: Int!
+  profilePictureUrl: String
+  bio: String
+}
+
+type Model3D @table {
+  name: String!
+  modelDataUrl: String!
+  createdAt: Timestamp!
+  description: String
+  thumbnailUrl: String
+  kashUnlockPrice: Int
+}
+
+type ColoredModel @table {
+  user: User
+  model3D: Model3D
+  createdAt: Timestamp!
+  imageUrl: String!
+  colorData: String!
+  title: String
+  description: String
+}
+
+type Battle @table {
+  type: String!
+  status: String!
+  entryFeeKashes: Int!
+  winnerRewardKashes: Int!
+  createdAt: Timestamp!
+  endsAt: Timestamp!
+  model3D: Model3D
+}
+
+type BattleSubmission @table {
+  user: User!
+  battle: Battle!
+  coloredModel: ColoredModel!
+  createdAt: Timestamp!
+  score: Int
+  isWinner: Boolean
+}
+
+type Transaction @table {
+  user: User!
+  type: String!
+  amount: Int!
+  createdAt: Timestamp!
+  description: String
+  battle: Battle
+  model3D: Model3D
+}

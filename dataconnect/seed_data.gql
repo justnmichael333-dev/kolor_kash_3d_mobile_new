@@ -1,0 +1,112 @@
+mutation CreateSeedData @transaction @auth(level: PUBLIC, insecureReason: "This operation is used to seed the database with initial data and is safe to expose to the public.") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      username: "demouser1",
+      email: "demouser1@example.com",
+      kashBalance: 100,
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      id: "660e8400-e29b-41d4-a716-446655440001",
+      username: "demouser2",
+      email: "demouser2@example.com",
+      kashBalance: 200,
+      createdAt: "2024-01-02T00:00:00Z"
+    }
+  ])
+  model3D_insertMany(data: [
+    {
+      id: "770e8400-e29b-41d4-a716-446655440002",
+      name: "demomodel1",
+      modelDataUrl: "http://example.com/demomodel1.glb",
+      createdAt: "2024-01-03T00:00:00Z"
+    },
+    {
+      id: "880e8400-e29b-41d4-a716-446655440003",
+      name: "demomodel2",
+      modelDataUrl: "http://example.com/demomodel2.glb",
+      createdAt: "2024-01-04T00:00:00Z"
+    }
+  ])
+  coloredModel_insertMany(data: [
+    {
+      id: "990e8400-e29b-41d4-a716-446655440004",
+      model3DId: "770e8400-e29b-41d4-a716-446655440002",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      colorData: "FFFFFF",
+      imageUrl: "http://example.com/democoloredmodel1.png",
+      createdAt: "2024-01-05T00:00:00Z"
+    },
+    {
+      id: "aa0e8400-e29b-41d4-a716-446655440005",
+      model3DId: "880e8400-e29b-41d4-a716-446655440003",
+      userId: "660e8400-e29b-41d4-a716-446655440001",
+      colorData: "000000",
+      imageUrl: "http://example.com/democoloredmodel2.png",
+      createdAt: "2024-01-06T00:00:00Z"
+    }
+  ])
+  battle_insertMany(data: [
+    {
+      id: "bb0e8400-e29b-41d4-a716-446655440006",
+      model3DId: "770e8400-e29b-41d4-a716-446655440002",
+      createdAt: "2024-01-07T00:00:00Z",
+      endsAt: "2024-01-08T00:00:00Z",
+      entryFeeKashes: 10,
+      status: "open",
+      type: "demo",
+      winnerRewardKashes: 100
+    },
+    {
+      id: "cc0e8400-e29b-41d4-a716-446655440007",
+      model3DId: "880e8400-e29b-41d4-a716-446655440003",
+      createdAt: "2024-01-09T00:00:00Z",
+      endsAt: "2024-01-10T00:00:00Z",
+      entryFeeKashes: 20,
+      status: "closed",
+      type: "demo",
+      winnerRewardKashes: 200
+    }
+  ])
+  transaction_insertMany(data: [
+    {
+      id: "dd0e8400-e29b-41d4-a716-446655440008",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      amount: 10,
+      createdAt: "2024-01-11T00:00:00Z",
+      type: "entryFee",
+      description: "entry fee for demo battle",
+      battleId: "bb0e8400-e29b-41d4-a716-446655440006"
+    },
+    {
+      id: "ee0e8400-e29b-41d4-a716-446655440009",
+      userId: "660e8400-e29b-41d4-a716-446655440001",
+      amount: 200,
+      createdAt: "2024-01-12T00:00:00Z",
+      type: "winningReward",
+      description: "winning reward for demo battle",
+      battleId: "cc0e8400-e29b-41d4-a716-446655440007"
+    }
+  ])
+  battleSubmission_insertMany(data: [
+    {
+      id: "ff0e8400-e29b-41d4-a716-446655440010",
+      battleId: "bb0e8400-e29b-41d4-a716-446655440006",
+      coloredModelId: "990e8400-e29b-41d4-a716-446655440004",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      createdAt: "2024-01-13T00:00:00Z",
+      isWinner: true,
+      score: 100
+    },
+    {
+      id: "gg0e8400-e29b-41d4-a716-446655440011",
+      battleId: "cc0e8400-e29b-41d4-a716-446655440007",
+      coloredModelId: "aa0e8400-e29b-41d4-a716-446655440005",
+      userId: "660e8400-e29b-41d4-a716-446655440001",
+      createdAt: "2024-01-14T00:00:00Z",
+      isWinner: false,
+      score: 50
+    }
+  ])
+}
