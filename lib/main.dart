@@ -52,3 +52,47 @@ class KolorKashApp extends StatelessWidget {
     );
   }
 }
+class BattlesScreen extends StatelessWidget {
+  static const routeName = '/battles';
+
+  const BattlesScreen({Key? key}) : super(key: key);
+
+  /// Expose route map so the main app can wire this screen into MaterialApp.routes
+  static Map<String, WidgetBuilder> routes() {
+    return {
+      routeName: (context) => const BattlesScreen(),
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Kolor Kash Battles')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Navigate to the battle arena; replace with your real battle screen
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const BattleArenaPlaceholder()),
+            );
+          },
+          child: const Text('Start Battle'),
+        ),
+      ),
+    );
+  }
+}
+
+class BattleArenaPlaceholder extends StatelessWidget {
+  const BattleArenaPlaceholder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Battle Arena')),
+      body: const Center(
+        child: Text('Battle arena will be implemented here'),
+      ),
+    );
+  }
+}
