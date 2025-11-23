@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kolorkash3d.app">
 
-    <!-- Network access for Flutter and Firebase -->
+    <!-- Needed for Flutter, Firebase, network calls, etc. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -18,7 +18,7 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
 
-            <!-- This is the launcher entry point -->
+            <!-- Main launcher entry point -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,13 +29,13 @@
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
 
-            <!-- Enable Flutter deep linking (harmless if unused) -->
+            <!-- Enable Flutter deep linking support (safe to leave on) -->
             <meta-data
                 android:name="flutter_deeplinking_enabled"
                 android:value="true" />
         </activity>
 
-        <!-- Splash background (uses @drawable/launch_background from Flutter template) -->
+        <!-- Splash screen background (uses launch_background.xml from Flutter template) -->
         <meta-data
             android:name="io.flutter.embedding.android.SplashScreenDrawable"
             android:resource="@drawable/launch_background" />
