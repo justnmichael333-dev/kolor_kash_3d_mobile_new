@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'analytics_service.dart';
-import 'kashes_service.dart';
 
 /// Service for managing PvP battles
 class PvPService {
