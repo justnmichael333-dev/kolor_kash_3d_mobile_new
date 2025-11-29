@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'firebase_options.dart';
 import 'screens/auth_gate.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Uses native config (google-services.json on Android).
-  await Firebase.initializeApp();
+  try {
+    // Initialize Firebase with platform-specific options
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    // If Firebase fails to initialize, log the error but continue
+    debugPrint('Firebase initialization error: $e');
+  }
 
   runApp(const KolorKashApp());
 }

@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../services/auth_service.dart';
 
 /// Shows basic user info and a placeholder Kashes wallet.
 /// Later this will hook into real balances, stats, and gift-card redemption.
 class ProfileScreen extends StatelessWidget {
-  final User user;
-  final AuthService authService;
-
-  const ProfileScreen({
-    Key? key,
-    required this.user,
-    required this.authService,
-  }) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
 
   String _initialFrom(String? displayName, String? email) {
     final String source;
@@ -28,12 +20,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+
     final String displayName =
-        (user.displayName?.trim().isNotEmpty ?? false)
-            ? user.displayName!.trim()
+        (user?.displayName?.trim().isNotEmpty ?? false)
+            ? user!.displayName!.trim()
             : 'Kolor Kash Artist';
-    final String? email = user.email;
-    final String? photoUrl = user.photoURL;
+    final String? email = user?.email;
+    final String? photoUrl = user?.photoURL;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
@@ -48,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                     photoUrl != null ? NetworkImage(photoUrl) : null,
                 child: photoUrl == null
                     ? Text(
-                        _initialFrom(user.displayName, email),
+                        _initialFrom(user?.displayName, email),
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -80,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          const _KashesCard(
+          _KashesCard(
             currentKashes: 1250, // Placeholder value for now.
           ),
           const SizedBox(height: 24),
@@ -89,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () async {
               try {
-                await authService.signOut();
+                await FirebaseAuth.instance.signOut();
                 // Your existing auth gate / main.dart should
                 // automatically show the login screen when user is null.
               } catch (e) {
@@ -211,7 +205,7 @@ class _RecentActivitySection extends StatelessWidget {
               ),
         ),
         const SizedBox(height: 8),
-        ...mockActivity.map((_ActivityItem item) {
+        ...mockActivity.map((_)ActivityItem item) {
           return ListTile(
             contentPadding: EdgeInsets.zero,
             leading: Icon(
