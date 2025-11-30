@@ -19,16 +19,18 @@ class _AuthGateState extends State<AuthGate> {
     return StreamBuilder<User?>(
       stream: _authService.authStateChanges,
       builder: (context, snapshot) {
+        debugPrint('AuthGate: connectionState=${snapshot.connectionState}, hasData=${snapshot.hasData}');
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
-
         final user = snapshot.data;
         if (user == null) {
+          debugPrint('AuthGate: No user, showing LoginScreen');
           return LoginScreen(authService: _authService);
         } else {
+          debugPrint('AuthGate: User logged in: ${user.uid}, showing HomeShell');
           return KolorKashHomeShell(user: user, authService: _authService);
         }
       },
@@ -57,7 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
           const SnackBar(content: Text('Google sign-in cancelled')),
         );
       }
-      // If user != null, the StreamBuilder in AuthGate will rebuild into the shell.
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Google sign-in failed: $e')),
@@ -115,9 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(Icons.login),
-                  label: Text(
-                    _isSigningIn ? 'Signing in...' : 'Sign in with Google',
-                  ),
+                  label: Text(_isSigningIn ? 'Signing in...' : 'Sign in with Google'),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -130,4 +129,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
